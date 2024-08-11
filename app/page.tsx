@@ -119,7 +119,7 @@ export default function Home() {
 
   return (
     <div className="bg-[#ceb5f7] min-h-screen flex justify-center items-center px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-full max-h-[80vh] sm:max-h-[700px] bg-[#dbcaec] border border-[#be9df1] shadow-md rounded-lg p-4 flex flex-col">
+      <div className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-full max-h-[80vh] sm:max-h-[700px] bg-[#f2eef7] border border-[#be9df1] shadow-md rounded-lg p-4 flex flex-col">
         <div className="flex-grow overflow-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
           {messages.map((msg, index) => (
             <div
@@ -130,7 +130,7 @@ export default function Home() {
             >
               <div
                 className={`text-black text-base p-3 rounded-lg border items-center ${
-                  msg.role === 'assistant' ? 'bg-[#f0f0f0] border-[#7c35ee]' : 'bg-[#e0e0ff] border-purple-500'
+                  msg.role === 'assistant' ? 'bg-[#e5daf0] border-[#752aee]' : 'bg-[#c99bf7] border-purple-500'
                 }`}
               >
                 {msg.content}
@@ -139,18 +139,18 @@ export default function Home() {
           ))}
           <div ref={messagesEndRef} />
         </div>
-        <div className="flex space-x-3 mt-4">
+        <div className="flex flex-col space-y-3 mt-4">
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyPress}
-            className="w-full px-4 py-2 text-black bg-white border border-[#7F5AA3] rounded-lg focus:outline-none focus:border-purple-500 resize-none flex-grow"
+            className="w-full px-4 py-2 text-black bg-white border border-[#7f5aa3] rounded-lg focus:outline-none focus:border-purple-500 resize-none"
             placeholder="Type your message here..."
-            rows={2} // Adjust the number of rows as needed
+            rows={3} // Adjust the number of rows as needed
           />
           <button
             onClick={sendMessage}
-            className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600"
+            className="bg-[#591a97] text-white p-2 text-base w-32 rounded-lg hover:bg-[#7f5aa3] self-start active:bg-[#862edf]"
             disabled={isLoading}
           >
             {isLoading ? 'Sending...' : 'Send'}
