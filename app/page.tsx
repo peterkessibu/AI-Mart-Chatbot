@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { auth, provider, signInWithPopup, signOut } from './firebase'; // Import Firebase auth functions
 
 interface Message {
   role: 'assistant' | 'user';
@@ -12,11 +13,12 @@ export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hi! I'm Paul, your AI mart assistant. How may I help?",
+      content: "Hi! I'm Doodo, your AI mart assistant. How may I help?",
     },
   ]);
   const [message, setMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [user, setUser] = useState(null); // State to hold the logged-in user
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = useCallback(() => {
@@ -99,13 +101,12 @@ export default function Home() {
       console.error('Error:', error);
       setMessages((prevMessages) => [
         ...prevMessages,
-        { role: 'assistant', content: "I'm sorry, but I encountered an error. Please try again later." },
+        { role: 'assistant', content: "Excuse me, but I'm not available right now. Please try again later." },
       ]);
     } finally {
       setIsLoading(false);
     }
   }, [message, isLoading, messages]);
-  
 
   const handleKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -117,9 +118,47 @@ export default function Home() {
     [sendMessage]
   );
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user);
+    } catch (error) {
+      console.error('Error during Google Sign-In:', error);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setUser(null);
+    } catch (error) {
+      console.error('Error during sign-out:', error);
+    }
+  };
+
   return (
-    <div className="bg-[#ceb5f7] min-h-screen flex justify-center items-center px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-full max-h-[80vh] sm:max-h-[700px] bg-[#f2eef7] border border-[#be9df1] shadow-md rounded-lg p-4 flex flex-col">
+    <div className="bg-[#ceb5f7] flex justify-center items-center px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-full max-h-[80vh] sm:max-h-[700px] bg-[#f2eef7] border border-[#be9df1] shadow-md rounded-lg p-4 flex flex-col ">
+        <div className="flex justify-between items-center mb-4">
+          {user ? (
+            <>
+              <span className="text-gray-700">Welcome, {user.displayName}</span>
+              <button
+                onClick={handleSignOut}
+                className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-700"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={handleGoogleSignIn}
+              className="bg-[#4285F4] text-white px-3 py-1 rounded-lg hover:bg-[#3367D6]"
+            >
+              Sign in with Google
+            </button>
+          )}
+        </div>
         <div className="flex-grow overflow-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-900">
           {messages.map((msg, index) => (
             <div
