@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { auth, provider, signInWithPopup, signOut } from "./firebase"; // Import Firebase auth functions
+import { auth, provider, signInWithPopup, signOut } from "./firebase"; 
 
 interface Message {
   role: "assistant" | "user";
