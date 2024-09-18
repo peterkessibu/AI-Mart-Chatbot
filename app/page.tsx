@@ -6,14 +6,14 @@ import { auth, provider, signInWithPopup, signOut } from "./firebase";
 interface Message {
   role: "assistant" | "user";
   content: string;
-  id?: number; // Optional ID for unique identification
+  id?: number; 
 }
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hi! I'm Doodo, your AI mart assistant. How may I help?",
+      content: "Hi! I'm Doodo, mart assistant. How may I help?",
     },
   ]);
   const [message, setMessage] = useState<string>("");

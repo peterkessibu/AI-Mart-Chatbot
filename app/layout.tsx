@@ -8,8 +8,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "AI Mart Chatbot",
-  description: "Welcome to Doodo's AI-powered customer service assistant.",
+  title: "Mart Chatbot",
+  description: "Welcome to Doodo's customer service assistant.",
 };
 
 export default function RootLayout({
