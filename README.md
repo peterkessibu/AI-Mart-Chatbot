@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# AI Interview Preparation Chatbot
+
+This project is an AI-powered chatbot designed to help with ustomer service of a mart. It is built with **Next.js**, **Firebase** for authentication and database storage, and **TailwindCSS** for UI styling. The chatbot interacts with users, providing assistance for items and overall mart day-to-day task.
+
+## Features
+
+- **User Authentication**: Google Sign-In using Firebase Authentication.
+- **Real-time Chat**: Users can ask interview-related questions, and the chatbot responds with relevant information.
+- **Responsive Design**: Styled using TailwindCSS, the app is mobile-friendly and responsive.
+- **Powered by OpenAI**: The chatbot uses OpenAI's GPT model for generating intelligent and relevant responses to interview questions.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To run this project, you’ll need to have the following installed:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Node.js](https://nodejs.org/) (v14 or higher)
+- [Firebase Account](https://firebase.google.com/)
+- [OpenAI API Key](https://platform.openai.com/signup/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/peterkessibu/AI-MART-CHATBOT.git
+   ```
 
-## Learn More
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Set up **Firebase**:
+   - Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
+   - Enable **Firestore** for database storage.
+   - Enable **Google Authentication** in the Firebase Authentication section.
+   - Enable **Firestore Database**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Create a `.env.local` file in the root of the project and add your Firebase credentials and OpenAI API key:
+   ```bash
+   NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-firebase-project-id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your-firebase-app-id
+   OPENAI_API_KEY=your-openai-api-key
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+6. Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `/components`: Contains React components such as `SignIn` and `Chat`.
+- `/firebase.js`: Firebase configuration and helper functions.
+- `/pages`: Main Next.js pages, including the home page where chat and authentication logic is implemented.
+- `/styles`: Global CSS file, including TailwindCSS setup.
+
+### Usage
+
+1. **Sign In**: Users can sign in using their Google account.
+2. **Chat**: After signing in, users can ask the AI chatbot questions related to items inventory.
+
+### Tech Stack
+
+- **Frontend**: Next.js, React.js
+- **Backend**: Firebase (Firestore for chat storage, Authentication for user sign-in)
+- **Styling**: TailwindCSS
+- **AI**: OpenAI GPT model
+
+### Future Improvements
+
+- Add more specific question categories (e.g., time of opening, sales events, etc.).
+- Add voice support for better user interaction.
+- Improve chatbot accuracy with fine-tuning models such as using Pinecone and a vector database.
+
+### License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
+
