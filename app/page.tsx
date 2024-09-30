@@ -18,7 +18,12 @@ export default function Home() {
   ]);
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [user, setUser] = useState(null); // State to hold the logged-in user
+  interface User {
+    displayName: string | null;
+    // Add other properties if needed
+  }
+
+  const [user, setUser] = useState<User | null>(null); // State to hold the logged-in user
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = useCallback(() => {
